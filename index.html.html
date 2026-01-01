@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nossa História | 08.05.2024</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --gold: #c5a358; --pink: #ff7a9c; --bg: #070205; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Playfair Display', serif; background: var(--bg); color: #f2dce2; overflow-x: hidden; min-height: 100vh; }
+
+    /* Custom cursor only on devices that support hover (desktops) */
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor { display: block; }
+    }
+    #cursor { position: fixed; width: 10px; height: 10px; background: var(--pink); border-radius: 50%; pointer-events: none; z-index: 10000; box-shadow: 0 0 15px var(--pink); display: none; transform: translate(-50%, -50%); }
+
+    canvas { position: fixed; top: 0; left: 0; z-index: -1; display: block; }
+
+    /* Estilo dos Corações da Explosão */
+    .heart-particle {
+      position: absolute; pointer-events: none; color: var(--pink);
+      font-size: 20px; animation: floatUp 1.5s ease-out forwards;
+      transform-origin: center;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+    }
+
+    section.momento {
+      min-height: 100vh; padding: 40px 20px;
+      display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+      max-width: 850px; margin: 0 auto;
+      animation: fadeIn 1.5s forwards;
+    }
+    section.ativo { display: flex; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .data-topo { font-size: 11px; letter-spacing: 8px; color: var(--pink); text-transform: uppercase; margin-bottom: 20px; }
+    h1 { font-size: 38px; margin-bottom: 30px; font-weight: 700; color: #fff; min-height: 50px; }
+    p { font-size: 24px; line-height: 1.8; margin-bottom: 30px; }
+    .destaque-frase { color: var(--pink); font-style: italic; }
+
+    .btn-proximo {
+      background: none; border: 1px solid var(--gold); color: var(--gold);
+      padding: 15px 40px; border-radius: 2px; cursor: pointer;
+      font-family: 'Montserrat'; font-size: 11px; letter-spacing: 4px;
+      text-transform: uppercase; transition: 0.25s; position: relative;
+    }
+    .btn-proximo:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 30px rgba(197, 163, 88, 0.4); }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.02); padding: 40px; border-radius: 10px;
+      border: 1px solid rgba(255, 122, 156, 0.1); backdrop-filter: blur(10px);
+    }
+
+    .contador-box { font-family: 'Montserrat'; font-size: 14px; color: var(--gold); margin-top: 30px; border-top: 1px solid rgba(197, 163, 88, 0.2); padding-top: 20px; }
+    .img-frame { border-radius: 5px; overflow: hidden; margin-top: 30px; border: 1px solid rgba(255, 122, 156, 0.3); box-shadow: 0 0 30px rgba(255, 122, 156, 0.1); }
+    img { width: 100%; max-width: 400px; transition: transform 2s ease; display: block; }
+    img:hover { transform: scale(1.02); }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 28px; }
+      p { font-size: 19px; }
+      #cursor { display: none !important; }
+      body { cursor: auto; }
+    }
+
+    /* Visually-hidden helper for accessibility */
+    .sr-only { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  </style>
+</head>
+<body>
+
+  <div id="cursor" aria-hidden="true"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <section class="momento ativo" id="cap1">
+    <span class="data-topo">Onde tudo nasceu</span>
+    <h1 class="typewriter">O encontro que eu não planejei</h1>
+    <p>
+      Sabe, às vezes eu paro para pensar no dia 8 de maio de 2024. Naquele momento, eu não tinha ideia de que você conseguiria mudar minha vida por completo.
+      <br><br>
+      Eu não te procurei ativamente, e certamente não planejei me apaixonar assim. Mas o destino tem dessas coisas, nos uniu por acaso naquela sala do avakin...
+      <br><br>
+      Em algum momento, sem que eu percebesse, você deixou de ser apenas alguém para se tornar o lugar onde eu finalmente descanso.
+    </p>
+    <button class="btn-proximo" onclick="avancar('cap2', this)" aria-controls="cap2">Continuar nossa história</button>
+  </section>
+
+  <section class="momento" id="cap2">
+    <div class="glass-card">
+      <span class="data-topo">Nosso 7° mês juntos</span>
+      <h1>Um laço que se fortalece</h1>
+      <p>
+        Hoje é o nosso dia, a data mais especial do meu calendário. É o dia que tornou a nossa escolha de caminhar juntos, o dia em que decidimos nos amar ainda mais. 
+        <br><br>
+        Você não se tornou especial pra mim a partir dessa data, porque foi nesse dia que eu tive a certeza que você já era especial pra mim.
+        <br><br>
+        Mesmo que ainda estejamos, por um instante, distantes fisicamente, saiba que meu coração nunca esteve tão próximo do seu. Quero poder comemorar esse momento ao seu lado para sempre.
+      </p>
+      <div class="contador-box" id="timer" aria-live="polite">Contando cada segundo...</div>
+    </div>
+    <button class="btn-proximo" onclick="avancar('cap3', this)" aria-controls="cap3">Seguir para o futuro</button>
+  </section>
+
+  <section class="momento" id="cap3">
+    <span class="data-topo">2026</span>
+    <h1>O que o tempo nos reserva</h1>
+    <p>
+      Entrar em 2026 com você, minha princesa, é tudo o que eu mais quero no mundo. Sonhar com nossa vida juntos, ter filhos, construir memórias...
+      <br><br>
+      Sentir o amor pesar mais que a distância.
+      <br><br>
+      <span class="destaque-frase">Você me fez sentir amado de um jeito que nunca senti antes, e isso mudou tudo em mim.</span>
+    </p>
+    <button class="btn-proximo" onclick="avancar('cap4', this)" aria-controls="cap4">Ouvir um segredo</button>
+  </section>
+
+  <section class="momento" id="cap4">
+    <span class="data-topo">A Conexão</span>
+    <h1>O som da sua voz</h1>
+    <p>
+      O dia em que ouvi sua voz bem pertinho de mim foi único. Mesmo à distância, minha vida, eu me senti mais próximo de você do que nunca.
+      <br><br>
+      Foi ali que entendi: você não é só alguém que amo… <br><strong>você é minha mulher.</strong>
+    </p>
+    <button class="btn-proximo" onclick="avancar('cap5', this)" aria-controls="cap5">Olhe para mim</button>
+  </section>
+
+  <section class="momento" id="cap5">
+    <h1>O que me alcança primeiro...</h1>
+    <p>Existe uma parte sua que sempre me alcança antes de qualquer palavra. Sabe qual é?</p>
+    <button class="btn-proximo" id="btn-revelar" onclick="revelarOlhos(this)" aria-expanded="false">Descobrir</button>
+
+    <div id="box-olhos" style="display:none; margin-top:20px;">
+      <div class="img-frame">
+        <img src="https://i.postimg.cc/8Cs0SFQN/242319da-b8c1-4a82-88ca-3291a85de6ce.jpg" alt="Foto dos olhos" loading="lazy">
+      </div>
+      <p style="font-size: 20px; margin-top:25px;">
+        São os seus olhos. No começo, quando a gente ainda estava se aproximando, eu voltava nos seus destaques só pra te ver. 
+        <br><br>
+        Hoje eu não faço mais isso, porque agora eu tenho você inteira guardada em mim, minha vida.
+        <br><br>
+        <span class="destaque-frase">Antes eram destaques. Hoje é história.</span>
+      </p>
+      <button class="btn-proximo" onclick="avancar('cap6', this)" aria-controls="cap6">Uma última promessa</button>
+    </div>
+  </section>
+
+  <section class="momento" id="cap6">
+    <span class="data-topo">O nosso encontro</span>
+    <h1>Para o resto da vida</h1>
+    <p>
+      Nos seus próximos aniversários (a partir de 2027), minha promessa é estar mais perto. Quero te olhar sem a interferência de uma tela. 
+      <br><br>
+      Quero te abraçar até que a saudade não tenha mais onde morar, quero sentir a maciez da sua boca em mim, quero tocar nos seus olhos e ver se são de verdade...
+      <br><br>
+      Se um dia você voltar a este site, saiba que não é coincidência. É porque eu ainda estou aqui, exatamente onde prometi, esperando por você, meu amor.
+    </p>
+  </section>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    if (cursor) {
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+    }
+
+    // Função de Avançar com Explosão de Corações
+    function avancar(id, btn) {
+      const rect = btn.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2 + window.scrollY;
+
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-particle';
+        heart.innerHTML = '❤';
+        // Position relative to viewport + scroll
+        heart.style.left = centerX + 'px';
+        heart.style.top = centerY + 'px';
+        heart.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+        heart.style.setProperty('--ty', (Math.random() - 0.5) * 200 - 50 + 'px');
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1500);
+      }
+
+      setTimeout(() => {
+        document.querySelectorAll('.momento').forEach(s => s.classList.remove('ativo'));
+        const target = document.getElementById(id);
+        if (target) {
+          target.classList.add('ativo');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 400);
+    }
+
+    function revelarOlhos(btn) {
+      // show hearts + reveal content
+      avancar('cap5', btn);
+      btn.style.display = 'none';
+      const box = document.getElementById('box-olhos');
+      if (box) box.style.display = 'block';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    // Estrelas (canvas)
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext ? canvas.getContext('2d') : null;
+    let points = [];
+    function initCanvas() {
+      if (!ctx) return;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.scale(dpr, dpr);
+
+      points = [];
+      for (let i = 0; i < 100; i++) {
+        points.push({ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, s: Math.random() * 2 + 0.3 });
+      }
+    }
+    function animateStars() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(255, 122, 156, 0.4)";
+      points.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+        ctx.fill();
+        p.y -= 0.15;
+        if (p.y < -10) p.y = window.innerHeight + 10;
+      });
+      requestAnimationFrame(animateStars);
+    }
+    initCanvas();
+    animateStars();
+    window.addEventListener('resize', () => {
+      initCanvas();
+    });
+
+    // Contador (08/05/2024)
+    // Use UTC to avoid timezone inconsistencies if you want consistent days counted globally:
+    const dataInicio = new Date("2024-05-08T00:00:00").getTime();
+    function atualizarContador() {
+      const diff = new Date().getTime() - dataInicio;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const timerEl = document.getElementById('timer');
+      if (timerEl) timerEl.innerText = `${d} dias, ${h}h ${m}m ${s}s de nós`;
+    }
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+  </script>
+</body>
+</html>
